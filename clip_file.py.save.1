@@ -7,7 +7,6 @@ from PIL import Image
 import glob
 from PIL import Image
 def find_class(image,classes):
-    print("hey waqas")
     if(len(classes) != 0):
         file = open('_tokenization.txt' , 'a')
         file.write(classes)
@@ -17,12 +16,10 @@ def find_class(image,classes):
         candidate_captions = f.read().splitlines()
     class_names = candidate_captions
     result = process(image,candidate_captions)
-    print("waqas anwar")
     return result
 
 
 def process (img, candidate_captions):    
-    print("Muhammad Waqas")
     def argmax(iterable):
         return max(enumerate(iterable), key=lambda x: x[1])[0]
 
@@ -42,7 +39,7 @@ def process (img, candidate_captions):
 
         logits_per_image, logits_per_text = model(image, text)
         probs = logits_per_image.softmax(dim=-1).cpu().numpy()
-   
+
         pred = candidate_captions[argmax(list(probs)[0])]
         print(pred)
         return pred
